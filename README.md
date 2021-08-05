@@ -58,8 +58,9 @@ To use the CodeBuild CloudFormation Template:
 1. Edit `cluster-codebuild/EKSCodeBuildStack.template.json` to change Location to your GitHub repo/path
 1. Run `aws codebuild import-source-credentials --server-type GITHUB --auth-type PERSONAL_ACCESS_TOKEN --token <token_value>` to provide your token to CodeBuild
 1. Deploy `cluster-codebuild/EKSCodeBuildStack.template.json`
-1. Go to the CodeBuild console, click on the Build project that starts with `EKSCodeBuild`, and then click the Start build button.
-1. (Optional) You can click the Tail logs button to follow along with the build process
+   1. `aws cloudformation create-stack --stack-name "quickstart-eks-bootstrap-stack" --template-body file://cluster-codebuild/EKSCodeBuildStack.template.json --capabilities CAPABILITY_NAMED_IAM`
+2. Go to the CodeBuild console, click on the Build project that starts with `EKSCodeBuild`, and then click the Start build button.
+3. (Optional) You can click the Tail logs button to follow along with the build process
 
 **_NOTE:_** This also enables a GitOps pattern where changes to the cluster-bootstrap folder on the branch mentioned (main by default) will re-trigger this CodeBuild to do another `cdk deploy` via web hook.
 
